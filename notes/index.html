@@ -70,14 +70,48 @@
         .notes li a:hover {
             text-decoration: underline;
         }
+        .password-prompt {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #fce4ec;
+            border: 1px solid #f8bbd0;
+            border-radius: 8px;
+        }
+        .password-prompt input {
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .password-prompt button {
+            padding: 0.5rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .password-prompt button:hover {
+            background: #45a049;
+        }
     </style>
     <script>
-        function toggleNotes(folderId) {
+        function togglePasswordPrompt(folderId) {
+            const passwordPrompt = document.getElementById(`${folderId}-password`);
+            passwordPrompt.style.display = passwordPrompt.style.display === "block" ? "none" : "block";
+        }
+
+        function checkPassword(folderId, password) {
+            const enteredPassword = document.getElementById(`${folderId}-input`).value;
             const notesList = document.getElementById(folderId);
-            if (notesList.style.display === "none" || notesList.style.display === "") {
+            const passwordPrompt = document.getElementById(`${folderId}-password`);
+            
+            if (enteredPassword === password) {
+                passwordPrompt.style.display = "none";
                 notesList.style.display = "block";
             } else {
-                notesList.style.display = "none";
+                alert("Incorrect password. Please try again.");
             }
         }
     </script>
@@ -88,7 +122,12 @@
     </header>
     <main>
         <div class="folder">
-            <h2>Subject 1 <span onclick="toggleNotes('notes1')">View Notes</span></h2>
+            <h2>Sem-2 Entrepreneurship & Entrepreneurial Self<span onclick="togglePasswordPrompt('notes1')">Access Notes</span></h2>
+            <div class="password-prompt" id="notes1-password">
+                <label for="notes1-input">Enter Password:</label>
+                <input type="password" id="notes1-input" placeholder="Password">
+                <button onclick="checkPassword('notes1', 'password123')">Submit</button>
+            </div>
             <ul class="notes" id="notes1">
                 <li><a href="Notes/Subject1/Chapter1.pdf" download>Chapter 1</a></li>
                 <li><a href="Notes/Subject1/Chapter2.pdf" download>Chapter 2</a></li>
@@ -96,14 +135,19 @@
         </div>
 
         <div class="folder">
-            <h2>Subject 2 <span onclick="toggleNotes('notes2')">View Notes</span></h2>
+            <h2>Subject 2 <span onclick="togglePasswordPrompt('notes2')">Access Notes</span></h2>
+            <div class="password-prompt" id="notes2-password">
+                <label for="notes2-input">Enter Password:</label>
+                <input type="password" id="notes2-input" placeholder="Password">
+                <button onclick="checkPassword('notes2', 'secure456')">Submit</button>
+            </div>
             <ul class="notes" id="notes2">
                 <li><a href="Notes/Subject2/Topic1.pdf" download>Topic 1</a></li>
                 <li><a href="Notes/Subject2/Topic2.pdf" download>Topic 2</a></li>
             </ul>
         </div>
 
-        <!-- Add more subjects as needed -->
+        <!-- Add more subjects as needed with corresponding passwords -->
 
     </main>
 </body>
