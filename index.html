@@ -15,6 +15,16 @@
             --overlay-bg-color: rgba(0, 0, 0, 0.5);
         }
 
+        .theme-dark {
+            --primary-bg: #333;
+            --secondary-bg: #555;
+            --primary-text-color: #ddd;
+            --button-bg-color: #444;
+            --hover-bg-color: #ddd;
+            --hover-text-color: #333;
+            --overlay-bg-color: rgba(0, 0, 0, 0.7);
+        }
+
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
@@ -105,8 +115,16 @@
     </style>
     <script>
         function showPopup(section) {
-            document.querySelector('.popup h2').innerText = section;
-            document.querySelector('.popup').style.display = 'block';
+            const popup = document.querySelector('.popup');
+            const content = {
+                'Introduction': 'Inspiring Innovation, Empowering Entrepreneurs. Academic, Mentor, and Startup Visionary Driving Change in Business and Beyond.',
+                'Work': 'Discover groundbreaking projects and research initiatives in entrepreneurship and innovation.',
+                'About': 'Dr. Milan Patel is a dedicated academician and mentor, shaping the future of aspiring entrepreneurs.',
+                'Contact': 'Email: <a href="mailto:mail@milanpatel.in">mail@milanpatel.in</a>'
+            };
+            popup.querySelector('h2').innerText = section;
+            popup.querySelector('p').innerHTML = content[section] || 'Details coming soon.';
+            popup.style.display = 'block';
             document.querySelector('.overlay').style.display = 'block';
         }
 
@@ -114,23 +132,29 @@
             document.querySelector('.popup').style.display = 'none';
             document.querySelector('.overlay').style.display = 'none';
         }
+
+        function toggleTheme(theme) {
+            document.body.className = theme;
+        }
     </script>
 </head>
 <body>
     <header>
         <h1>Dr. Milan Patel</h1>
         <p>Professor, Researcher, and Innovator in Entrepreneurship</p>
+        <button onclick="toggleTheme('')">Default Theme</button>
+        <button onclick="toggleTheme('theme-dark')">Dark Theme</button>
     </header>
     <nav>
         <a href="#" onclick="showPopup('Introduction')">Intro</a>
         <a href="#" onclick="showPopup('Work')">Work</a>
-        <a href="notes_navigation_page.html">Notes</a>
+        <a href="https://milanpatel.in/notes/index.html">Notes</a>
         <a href="#" onclick="showPopup('About')">About</a>
         <a href="#" onclick="showPopup('Contact')">Contact</a>
     </nav>
     <main>
-        <h2>Welcome to My Professional Website</h2>
-        <p>Explore my work, notes, and connect with me for academic and professional collaborations.</p>
+        <h2>Empowering the Next Generation of Innovators and Entrepreneurs</h2>
+        <p>With a profound commitment to education, research, and innovation, I strive to inspire aspiring entrepreneurs and guide them on their journey to success.</p>
     </main>
     <footer>
         <p>&copy; 2025 Dr. Milan Patel. All Rights Reserved.</p>
